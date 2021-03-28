@@ -7,10 +7,11 @@ service TelegramAuthorizer {
 }
 
 message TelegramAuthRequest {
-  string userId = 1;
+  string userName = 1;
+  string applicationClientId = 2;
 }
 
 message TelegramAuthReply {
-  string userId = 1;
-  int32 code = 2;
+  string userName = 1;
+  string code = 2;
 }

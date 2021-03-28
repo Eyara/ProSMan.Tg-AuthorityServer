@@ -24,7 +24,7 @@ namespace ProSMan.Tg_AuthorityServer
 
 		public override async Task<TelegramAuthReply> GetTelegramCode(TelegramAuthRequest request, ServerCallContext context)
 		{
-			return await _mediator.Send(new GetOrInsertCommand(request, context));
+			return await _mediator.Send(new GetOrInsertCommand { Request = request, CallContext = context });
 		}
 	}
 }

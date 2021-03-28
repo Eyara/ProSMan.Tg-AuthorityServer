@@ -18,7 +18,11 @@ namespace ProSMan.Tg_TestClient
 			headers.Add("client-secret", "fdce154b-30d3-43d4-9dc2-9f98b4975d6f");
 
 			var reply = await client.GetTelegramCodeAsync(
-							  new TelegramAuthRequest { UserId = "3beced88-d023-493f-8f21-0300d69d7852" }, headers);
+							  new TelegramAuthRequest
+							  {
+								  ApplicationClientId = "fdce154b-30d3-43d4-9dc2-9f98b4975d6f",
+								  UserName = "UserTest"
+							  }, headers);
 
 			Console.WriteLine(reply);
 		}

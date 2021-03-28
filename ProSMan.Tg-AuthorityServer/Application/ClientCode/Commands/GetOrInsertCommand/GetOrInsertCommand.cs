@@ -8,13 +8,5 @@ namespace ProSMan.Telegram.AuthorityServer.Application.ClientCode.Commands.GetOr
 	{
 		public TelegramAuthRequest Request { get; set; }
 		public ServerCallContext CallContext { get; set; }
-
-		public GetOrInsertCommand(
-			TelegramAuthRequest request,
-			ServerCallContext callContext)
-		{
-			Request = request;
-			CallContext = callContext;
-		}
 	}
 }

@@ -9,14 +9,18 @@ namespace ProSMan.Telegram.Infrastructure
 		public TelegramContext(DbContextOptions<TelegramContext> options) : base(options) { }
 
 		public DbSet<Client> Clients { get; set; }
-		public DbSet<ClientCode> ClientCodes { get; set; }
+		public DbSet<ClientPermission> ClientPermissions { get; set; }
+		public DbSet<ApplicationClient> ApplicationClients { get; set; }
+		public DbSet<ApplicationClientCode> ApplicationClientCodes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
 
 			builder.ApplyConfiguration(new ClientConfiguration());
-			builder.ApplyConfiguration(new ClientCodeConfiguration());
+			builder.ApplyConfiguration(new ClientPermissionConfiguration());
+			builder.ApplyConfiguration(new ApplicationClientConfiguration());
+			builder.ApplyConfiguration(new ApplicationClientCodeConfiguration());
 		}
 	}
 }

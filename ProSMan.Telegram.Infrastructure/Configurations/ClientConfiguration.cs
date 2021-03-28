@@ -10,7 +10,7 @@ namespace ProSMan.Telegram.Infrastructure.Map
 		{
 			builder.HasKey(x => x.Id);
 
-			builder.HasMany(x => x.ClientCodes)
+			builder.HasMany(x => x.ClientPermissions)
 				.WithOne(x => x.Client);
 		}
 	}

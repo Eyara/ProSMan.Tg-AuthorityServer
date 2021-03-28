@@ -10,6 +10,6 @@ namespace ProSMan.Telegram.Model
 		public string Id { get; set; }
 		public Guid Secret { get; set; }
 
-		public virtual ICollection<ClientCode> ClientCodes { get; set; }
+		public virtual ICollection<ClientPermission> ClientPermissions { get; set; }
 	}
 }

@@ -44,6 +44,8 @@ namespace ProSMan.Telegram.AuthorityServer.Interceptors
 				throw new RpcException(new Status(StatusCode.Unauthenticated, "Client secret is invalid"));
 			}
 
+			// TODO add permission check
+
 			return await continuation(request, context);
 		}
 	}

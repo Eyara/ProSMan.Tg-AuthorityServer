@@ -8,7 +8,9 @@ namespace ProSMan.Telegram.AuthorityServer.Profiles
 	{
 		public ClientProfile()
 		{
-			CreateMap<Client, ClientDTO>();
+			CreateMap<Client, ClientDTO>()
+				.ReverseMap()
+				.ForMember(dest => dest.ClientPermissions, opts => opts.Ignore());
 		}
 	}
 }

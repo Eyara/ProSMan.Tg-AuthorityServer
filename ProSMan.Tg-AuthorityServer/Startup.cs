@@ -12,6 +12,7 @@ using ProSMan.Telegram.AuthorityServer.Interceptors;
 using ProSMan.Telegram.AuthorityServer.Profiles;
 using ProSMan.Telegram.AuthorityServer.Repositories;
 using ProSMan.Telegram.Infrastructure;
+using System.Linq;
 using System.Reflection;
 
 namespace ProSMan.Tg_AuthorityServer
@@ -35,13 +36,13 @@ namespace ProSMan.Tg_AuthorityServer
 						b => b.MigrationsAssembly(typeof(TelegramContext).Assembly.GetName().Name));
 			});
 
-			services.AddAutoMapper(typeof(ClientCodeProfile));
+			services.AddAutoMapper(typeof(ApplicationClientCodeProfile));
 			services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
 			services.AddScoped<GrpcAuthInterceptor>();
 
 			services.AddTransient<IClientRepository, ClientRepository>();
-			services.AddTransient<IClientCodeRepository, ClientCodeRepository>();
+			services.AddTransient<IApplicationClientCodeRepository, ApplicationClientCodeRepository>();
 
 			services.AddGrpc(options =>
 			{
@@ -56,6 +57,17 @@ namespace ProSMan.Tg_AuthorityServer
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			using (var scope = app.ApplicationServices.CreateScope())
+			{
+				var services = scope.ServiceProvider;
+				var context = services.GetRequiredService<TelegramContext>();
+				if (context.Database.GetPendingMigrations().Any())
+				{
+					context.Database.Migrate();
+				}
+			}
+
 
 			mapper.ConfigurationProvider.AssertConfigurationIsValid();
 

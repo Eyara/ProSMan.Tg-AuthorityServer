@@ -11,10 +11,10 @@ namespace ProSMan.Telegram.AuthorityServer.Application.ClientCode.Commands.GetOr
 {
 	public class GetOrInsertHandler : IRequestHandler<GetOrInsertCommand, TelegramAuthReply>
 	{
-		private IClientCodeRepository _clientCodeRepository { get; set; }
+		private IApplicationClientCodeRepository _clientCodeRepository { get; set; }
 
 		public GetOrInsertHandler(
-			IClientCodeRepository clientCodeRepository)
+			IApplicationClientCodeRepository clientCodeRepository)
 		{
 			_clientCodeRepository = clientCodeRepository;
 		}
@@ -24,20 +24,20 @@ namespace ProSMan.Telegram.AuthorityServer.Application.ClientCode.Commands.GetOr
 			var clientId = request.CallContext.RequestHeaders
 				.First(h => h.Key.Equals("client-id"))?.Value;
 
-			Guid userId;
-			bool isValidUserId = Guid.TryParse(request.Request.UserId, out userId);
+			Guid applicationClientId;
+			bool isValidUserId = Guid.TryParse(request.Request.ApplicationClientId, out applicationClientId);
 
 			if (!isValidUserId)
 			{
-				throw new RpcException(new Status(StatusCode.InvalidArgument, "UserId should be guid"));
+				throw new RpcException(new Status(StatusCode.InvalidArgument, "Application client id should be guid"));
 			}
 
-			var clientCode = await _clientCodeRepository.GetOrInsertAsync(clientId, userId);
+			var clientCode = await _clientCodeRepository.GetOrInsertAsync(applicationClientId, request.Request.UserName);
 
 			return new TelegramAuthReply
 			{
-				Code = Convert.ToInt32(clientCode.Code),
-				UserId = request.Request.UserId
+				Code = clientCode.Code,
+				UserName = clientCode.UserName
 			};
 		}
 	}

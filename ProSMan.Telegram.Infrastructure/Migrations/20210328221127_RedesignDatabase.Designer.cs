@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProSMan.Telegram.Infrastructure;
 
 namespace ProSMan.Telegram.Infrastructure.Migrations
 {
     [DbContext(typeof(TelegramContext))]
-    partial class TelegramContextModelSnapshot : ModelSnapshot
+    [Migration("20210328221127_RedesignDatabase")]
+    partial class RedesignDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

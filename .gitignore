@@ -7,3 +7,5 @@ ProSMan.Telegram.Infrastructure/bin/
 ProSMan.Tg-AuthorityServer/bin/
 ProSMan.Tg-TestClient/bin/
 ProSMan.Telegram.Model/bin/
+ProSMan.Telegram.Common/bin/Debug/netcoreapp3.1/ProSMan.Telegram.Common.pdb
+ProSMan.Telegram.Common/bin/
