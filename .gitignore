@@ -1,0 +1,9 @@
+.vs/
+ProSMan.Telegram.Core/obj/
+ProSMan.Telegram.DTO/bin/
+ProSMan.Telegram.DTO/obj/
+ProSMan.Telegram.Infrastructure/bin/
+*/obj/
+ProSMan.Tg-AuthorityServer/bin/
+ProSMan.Tg-TestClient/bin/
+ProSMan.Telegram.Model/bin/
